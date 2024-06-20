@@ -7,8 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "t_orders")
@@ -22,11 +21,8 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String orderNumber;
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<OrderLineItems> orderLineItemsList = new ArrayList<>();
+    private String skuCode;
+    private BigDecimal price;
+    private Integer quantity;
 
-    public void addOrderLineItems(OrderLineItems orderLineItems) {
-        orderLineItems.setOrder(this);
-        this.orderLineItemsList.add(orderLineItems);
-    }
 }

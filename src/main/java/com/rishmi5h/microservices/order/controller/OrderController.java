@@ -1,9 +1,10 @@
 package com.rishmi5h.microservices.order.controller;
 
+import com.rishmi5h.microservices.order.dto.OrderRequest;
 import com.rishmi5h.microservices.order.service.OrderService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/order")
@@ -11,6 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrderController {
 
     private final OrderService orderService;
+
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public String placeOrder(@RequestBody OrderRequest orderRequest){
+        orderService.placeOrder(orderRequest);
+        return "Order Placed Successfully";
+    }
 
 
 }
